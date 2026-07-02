@@ -49,7 +49,7 @@ function draw() {
         for(let j=0; j<skeleton.length; j++){
             line(skeleton[j][0].position.x, skeleton[j][0].position.y, skeleton[j][1].position.x, skeleton[j][1].position.y)
         }
-        //image(specs,singlePose.nose.x-35,singlePose.nose.y-50,80,80);
-        //image(smoke,singlePose.nose.x-35,singlePose.nose.y+10,40,40);
+        image(specs,singlePose.nose.x-35,singlePose.nose.y-50,80,80);
+        image(smoke,singlePose.nose.x-35,singlePose.nose.y+10,40,40);
     }
 }
