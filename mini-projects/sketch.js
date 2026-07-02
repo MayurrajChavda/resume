@@ -42,16 +42,57 @@ function draw() {
     image(capture, 0, 0);
     fill(255,0,0);
 
-    if(singlePose){
-        for(let i=0; i<singlePose.keypoints.length; i++){
-            ellipse(singlePose.keypoints[i].position.x, singlePose.keypoints[i].position.y,20);
-        }
-        stroke(255,255,255);
-        strokeWeight(5);
-        for(let j=0; j<skeleton.length; j++){
-            line(skeleton[j][0].position.x, skeleton[j][0].position.y, skeleton[j][1].position.x, skeleton[j][1].position.y)
-        }
-        image(specs,singlePose.nose.x-35,singlePose.nose.y-50,80,80);
-        image(smoke,singlePose.nose.x-35,singlePose.nose.y+10,40,40);
+    if (singlePose) {
+
+    // Draw keypoints
+    for (let i = 0; i < singlePose.keypoints.length; i++) {
+        ellipse(
+            singlePose.keypoints[i].position.x,
+            singlePose.keypoints[i].position.y,
+            20
+        );
     }
+
+    // Draw skeleton
+    stroke(255);
+    strokeWeight(5);
+    for (let j = 0; j < skeleton.length; j++) {
+        line(
+            skeleton[j][0].position.x,
+            skeleton[j][0].position.y,
+            skeleton[j][1].position.x,
+            skeleton[j][1].position.y
+        );
+    }
+
+    // Face points
+    let nose = singlePose.nose;
+    let leftEye = singlePose.leftEye;
+    let rightEye = singlePose.rightEye;
+
+    // Distance between eyes
+    let eyeDist = dist(
+        leftEye.x,
+        leftEye.y,
+        rightEye.x,
+        rightEye.y
+    );
+
+    // Face image size
+    let faceW = eyeDist * 3;
+    let faceH = faceW * 1.3;
+
+    // Draw actor image centered on the nose
+    image(
+        actor_img,
+        nose.x - faceW / 2,
+        nose.y - faceH / 2,
+        faceW,
+        faceH
+    );
+
+    // Optional accessories
+    image(specs, nose.x - eyeDist, nose.y - eyeDist * 0.8, eyeDist * 2, eyeDist);
+    image(smoke, nose.x - 20, nose.y + 10, 40, 40);
+}
 }
