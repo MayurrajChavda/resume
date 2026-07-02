@@ -7,6 +7,12 @@ let singlePose,skeleton;
 let actor_img;
 let specs,smoke;
 
+function preload() {
+    actor_img = loadImage("images/shahrukh.png");
+    specs = loadImage("images/spects.png");
+    smoke = loadImage("images/cigar.png");
+}
+
 function setup() {
     createCanvas(800, 500);
     capture = createCapture(VIDEO)
@@ -14,10 +20,6 @@ function setup() {
 
     posenet = ml5.poseNet(capture, modelLoaded);
     posenet.on('pose',receivedPoses);
-
-    actor_img = loadImage('images/shahrukh.png');
-    specs = loadImage('images/spects.png');
-    smoke = loadImage('images/cigar.png');
 
 }
 
